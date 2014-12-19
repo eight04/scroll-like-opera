@@ -9,9 +9,9 @@ Features
 * Force to scroll content under cursor. (Like scrolling with arrow keys)
 * Scroll `overflow: hidden` content.
 
-Demo
-----
-<https://rawgit.com/eight04/textarea-plus/master/demo.html>
+Test page
+---------
+<https://rawgit.com/eight04/scroll-like-opera/master/demo.html>
 
 Todos
 -----
