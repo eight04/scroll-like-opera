@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>Scroll like Opera</title>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="https://rawgit.com/eight04/end2end/master/dist/end2end.css">
+	<style>
+		.scroller-content {
+			width: 3000px;
+			height: 3000px;
+		}
+		.scroller {
+			border: 1px solid;
+			height: 200px;
+			overflow: scroll;
+		}
+		.s2 {
+			overflow-y: hidden;
+		}
+		.s3 {
+			overflow-x: hidden;
+		}
+		.s4 {
+			overflow: hidden;
+		}
+		.s5 {
+			overflow-x: hidden;
+		}
+		.s6 {
+			overflow-x: hidden;
+			margin: 100px 0;
+		}
+	</style>
+</head>
+<body class="container-sm padder">
+	<h2>Scroll like Opera <small>Test Page</small></h2>
+
+	<h3>overflow: scroll</h3>
+	<div class="scroller s1">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow-y: hidden</h3>
+	<div class="scroller s2">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow-x: hidden</h3>
+	<div class="scroller s3">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow: hidden</h3>
+	<div class="scroller s4">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>Nest scroller</h3>
+	<div class="scroller s5">
+		<div class="scroller s6">
+			<div class="scroller-content"></div>
+		</div>
+	</div>
+
+	<script src="scroll-like-opera.user.js"></script>
+</body>
+</html>
