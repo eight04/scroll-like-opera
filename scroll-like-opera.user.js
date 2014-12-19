@@ -12,7 +12,8 @@
 var config = {
 	scrollWidthHorizontalScrollbar: true,
 	scrollContentOnly: true,
-	scrollOverflowHidden: true
+	scrollOverflowHidden: true,
+	scrollingElapsed: 200
 };
 
 function getBorder(element){
@@ -60,6 +61,33 @@ function getScrollInfo(element, e) {
 		scrollerX: window.innerHeight - element.clientHeight,
 		scrollerY: window.innerWidth - element.clientWidth
 	};
+}
+
+var animate = null;
+function scroll(element, deltaX, deltaY) {
+	cancelAnimationFrame(animate);
+
+	var offsetX = deltaX * 138 / 3;
+	var offsetY = deltaY * 138 / 3;
+	var scrollX = element.scrollLeft;
+	var scrollY = element.scrollTop;
+	var timestart = null;
+	var elapsed = config.scrollingElapsed;
+
+	function animation(timestamp){
+		if (!timestart) {
+			timestart = timestamp;
+		}
+		if (timestamp - timestart > elapsed) {
+			return;
+		}
+		var time = (timestamp - timestart) / elapsed;
+		element.scrollLeft = scrollX + offsetX * ease(time);
+		element.scrollTop = scrollY + offsetY * ease(time);
+
+		animate = requestAnimationFrame(animation);
+	}
+	animate = requestAnimationFrame(animation);
 }
 
 window.addEventListener("wheel", function(e){
