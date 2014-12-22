@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Scroll like Opera</title>
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836"></script>
 	<script src="bower_components/bezier-easing/bezier-easing.js"></script>
 	<link rel="stylesheet" href="https://rawgit.com/eight04/end2end/master/dist/end2end.css">
 	<style>
@@ -37,6 +38,8 @@
 </head>
 <body class="container-sm">
 	<h2>Scroll like Opera <small>Test Page</small></h2>
+
+	<button class="btn-default" onclick="GM_config.open()">Config</button>
 
 	<h3>overflow: scroll</h3>
 	<div class="scroller s1">
