@@ -1,0 +1,29 @@
+{
+  "name": "scroll-like-opera",
+  "version": "0.1.0",
+  "homepage": "https://github.com/eight04/scroll-like-opera",
+  "authors": [
+    "eight <eight04@gmail.com>"
+  ],
+  "description": "An userscript providing Opera like scrolling behavior.",
+  "main": "scroll-like-opera.user.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "scroll",
+    "scrollbar"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bezier-easing": "~1.0.0"
+  }
+}

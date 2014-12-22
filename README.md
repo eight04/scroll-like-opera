@@ -15,7 +15,8 @@ Test page
 
 Todos
 -----
-
+* Make sure to scroll 138px?
+* Scroll again during animation?
 
 Changelog
 ---------
