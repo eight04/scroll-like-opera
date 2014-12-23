@@ -18,6 +18,8 @@ Todos
 
 Changelog
 ---------
+* 1.0.2 (Dec 23, 2014):
+	- Fix menu name.
 * 1.0.1 (Dec 23, 2014):
 	- Correct name.
 * 1.0.0 (Dec 23, 2014):

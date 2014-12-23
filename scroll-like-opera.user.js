@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     1.0.1
+// @version     1.0.2
 // @require 	https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -280,7 +280,7 @@
 		config.scrollDelay = +GM_config.get("scrollDelay");
 		config.scrollOffset = +GM_config.get("scrollOffset");
 
-		GM_registerMenuCommand("Linkify Plus Plus - Configure", function(){
+		GM_registerMenuCommand("Scroll like Opera - Configure", function(){
 			GM_config.open();
 		});
 	}
