@@ -15,6 +15,7 @@ Test page
 Todos
 -----
 * Better behavior when scrolling to top/bottom.
+* Get wrong value if zooming the page.
 
 Changelog
 ---------
