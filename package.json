@@ -1,7 +1,0 @@
-{
-  "name": "select-like-opera",
-  "version": "1.0.0",
-  "devDependencies": {
-    "grunt-bump": "0.0.16"
-  }
-}
