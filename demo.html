@@ -34,6 +34,12 @@
 			overflow-x: hidden;
 			margin: 100px 0;
 		}
+		.s7 {
+			overflow: scroll;
+		}
+		.s7 .scroller-content {
+			height: 100%;
+		}
 	</style>
 </head>
 <body class="container-sm">
@@ -61,11 +67,16 @@
 		<div class="scroller-content"></div>
 	</div>
 
-	<h3>Nest scroller</h3>
+	<h3>Nested</h3>
 	<div class="scroller s5">
 		<div class="scroller s6">
 			<div class="scroller-content"></div>
 		</div>
+	</div>
+
+	<h3>Unscrollable y</h3>
+	<div class="scroller s7">
+		<div class="scroller-content"></div>
 	</div>
 
 	<div class="page-footer">

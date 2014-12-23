@@ -27,50 +27,25 @@
 		Register event
 	*/
 	window.addEventListener("wheel", function(e){
-		if (!e.deltaY) {
-			return;
-		}
-
 		var q = getScrollInfo(e.target, e);
-
-		if (q.onScrollbarX) {
+		console.log(q);
+		if (q && (q.use || config.alwaysUse)) {
 			e.preventDefault();
-			scroll(q.element, getOffset(e.deltaY), 0);
-
-		} else if (q.scrollableX && (!q.scrollerY || !q.scrollableY) && config.scrollHorizontallyWithScrollbar &&
-				(q.scrollerX || !q.scrollableY && config.scrollOverflowHidden)) {
-			e.preventDefault();
-			scroll(q.element, getOffset(e.deltaY), 0);
-
-		} else if (!q.scrollerY && q.scrollableY && config.scrollOverflowHidden) {
-			e.preventDefault();
-			scroll(q.element, 0, getOffset(e.deltaY));
-
-		} else if (config.alwaysUse) {
-			e.preventDefault();
-			scroll(q.element, 0, getOffset(e.deltaY));
+			scroll(q.element, q.offsetX, q.offsetY);
 		}
 	});
 
 	/**
 		Main logic
 	*/
-	function getScrollInfo(element, e) {
-		// Get scrollable parent
-		while (element) {
-			if (element.offsetHeight > element.clientHeight || element.offsetWidth > element.clientWidth) {
-				break;
-			}
-			element = element.parentNode;
-		}
-
-		if (!element) {
-			return null;
-		}
+	function getInfo(element, e) {
+		var rect, border;
 
 		if (element != document.documentElement) {
-			var rect = element.getBoundingClientRect();
-			var border = getBorder(element);
+
+			rect = element.getBoundingClientRect();
+			border = getBorder(element);
+
 			return {
 				element: element,
 				onScrollbarX: e.clientY >= rect.top + border.top + element.clientHeight && e.clientY <= rect.bottom - border.bottom,
@@ -79,16 +54,56 @@
 				scrollerX: element.offsetHeight - border.top - border.bottom > element.clientHeight,
 				scrollerY: element.offsetWidth - border.left - border.right > element.clientWidth
 			};
+
+		} else {
+
+			return {
+				element: element,
+				onScrollBarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
+				scrollableX: element.scrollWidth > element.clientWidth,
+				scrollableY: element.scrollHeight > element.clientHeight,
+				scrollerX: window.innerHeight - element.clientHeight,
+				scrollerY: window.innerWidth - element.clientWidth
+			};
+		}
+	}
+
+	function getScrollInfo(element, e) {
+		var q;
+
+		// Get scrollable parent
+		while (element) {
+
+			q = getInfo(element, e);
+
+			if (e.deltaY && (q.onScrollbarX || useHorizontalScroll(q)) && scrollable(element, e.deltaY, 0)) {
+				// Horizontal scroll
+				q.offsetX = getOffset(e.deltaY);
+				q.offsetY = 0;
+				q.use = true;
+				return q;
+			}
+
+			if ((e.deltaX && q.scrollableX || e.deltaY && q.scrollableY) && scrollable(element, e.deltaX, e.deltaY)) {
+				if (e.deltaX && q.scrollerX || e.deltaY && q.scrollerY) {
+					// Usual cases
+					q.offsetX = getOffset(e.deltaX);
+					q.offsetX = getOffset(e.deltaY);
+					return q;
+				}
+				if (config.scrollOverflowHidden && (e.deltaX && !q.scrollerX || e.deltaY && !q.scrollerY)) {
+					// Scroll hidden
+					q.offsetX = getOffset(e.deltaX);
+					q.offsetY = getOffset(e.deltaY);
+					q.use = true;
+					return q;
+				}
+			}
+
+			element = element.parentNode;
 		}
 
-		return {
-			element: element,
-			onScrollBarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
-			scrollableX: element.scrollWidth > element.clientWidth,
-			scrollableY: element.scrollHeight > element.clientHeight,
-			scrollerX: window.innerHeight - element.clientHeight,
-			scrollerY: window.innerWidth - element.clientWidth
-		};
+		return null;
 	}
 
 	/**
@@ -124,13 +139,12 @@
 					q.timeStart = timestamp;
 				}
 				if (timestamp - q.timeStart >= elapsed || !scrollable(q.element, q.offsetX, q.offsetY)) {
-					q.element.scrollLeft += q.offsetX - q.lastX;
-					q.element.scrollTop += q.offsetY - q.lastY;
+					scrollBy(q.element, q.offsetX - q.lastX, q.offsetY - q.lastY);
 				} else {
 					time = (timestamp - q.timeStart) / elapsed;
 					process = ease(time);
-					offsetX = q.offsetX * process;
-					offsetY = q.offsetY * process;
+					offsetX = Math.floor(q.offsetX * process);
+					offsetY = Math.floor(q.offsetY * process);
 
 					scrollBy(q.element, offsetX - q.lastX, offsetY - q.lastY);
 
@@ -154,6 +168,16 @@
 	/**
 		Helpers
 	*/
+	function useHorizontalScroll(q) {
+		if (!config.scrollHorizontallyWithScrollbar) {
+			return false;
+		}
+		if (config.scrollOverflowHidden && !q.scrollerX && !q.scrollerY) {
+			return q.scrollableX && !q.scrollableY;
+		}
+		return q.scrollerX && (!q.scrollerY || !q.scrollableY);
+	}
+
 	function getOffset(delta) {
 		var direction = 0;
 		if (delta > 0) {
