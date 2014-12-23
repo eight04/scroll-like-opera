@@ -17,6 +17,7 @@ Todos
 * Better behavior when scrolling to top/bottom.
 * Get wrong value if zooming the page.
 * Need a better way to detect scrollbar. Current method doesn't work in Firefox's responsive design mode.
+* Chrome doesn't fire wheel event when cursor hover on window scrollbar.
 
 Changelog
 ---------
