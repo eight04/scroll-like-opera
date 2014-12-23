@@ -15,6 +15,7 @@
 	},
 	"globals": {
 		"GM_config": false,
+		"GM_registerMenuCommand": false,
 		"BezierEasing": false
 	}
 }

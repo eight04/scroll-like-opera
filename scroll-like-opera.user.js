@@ -6,7 +6,9 @@
 // @version     1.0.0
 // @require 	https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
-// @grant       none
+// @grant       GM_setValue
+// @grant		GM_getValue
+// @grant       GM_registerMenuCommand
 // ==/UserScript==
 
 (function(){
@@ -277,5 +279,9 @@
 		config.alwaysUse = GM_config.get("alwaysUse");
 		config.scrollDelay = +GM_config.get("scrollDelay");
 		config.scrollOffset = +GM_config.get("scrollOffset");
+
+		GM_registerMenuCommand("Linkify Plus Plus - Configure", function(){
+			GM_config.open();
+		});
 	}
 })();
