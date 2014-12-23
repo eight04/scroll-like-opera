@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     1.0.2
+// @version     1.0.3
 // @require 	https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -50,11 +50,11 @@
 
 			return {
 				element: element,
-				onScrollbarX: e.clientY >= rect.top + border.top + element.clientHeight && e.clientY <= rect.bottom - border.bottom,
-				scrollableX: element.scrollWidth > element.clientWidth,
-				scrollableY: element.scrollHeight > element.clientHeight,
-				scrollerX: element.offsetHeight - border.top - border.bottom > element.clientHeight,
-				scrollerY: element.offsetWidth - border.left - border.right > element.clientWidth
+				onScrollbarX: element.clientHeight && e.clientY >= rect.top + border.top + element.clientHeight && e.clientY <= rect.bottom - border.bottom,
+				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth,
+				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight,
+				scrollerX: element.clientHeight && element.offsetHeight - border.top - border.bottom > element.clientHeight,
+				scrollerY: element.clientWidth && element.offsetWidth - border.left - border.right > element.clientWidth
 			};
 
 		} else {
