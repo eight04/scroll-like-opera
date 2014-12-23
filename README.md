@@ -18,6 +18,8 @@ Todos
 
 Changelog
 ---------
+* 1.0.1 (Dec 23, 2014):
+	- Correct name.
 * 1.0.0 (Dec 23, 2014):
 	- First release.
 * 0.1.0 (Dec 19, 2014):
