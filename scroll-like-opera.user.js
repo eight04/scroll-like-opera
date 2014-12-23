@@ -28,7 +28,7 @@
 	*/
 	window.addEventListener("wheel", function(e){
 		var q = getScrollInfo(e.target, e);
-		console.log(q);
+
 		if (q && (q.use || config.alwaysUse)) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
@@ -88,7 +88,7 @@
 				if (e.deltaX && q.scrollerX || e.deltaY && q.scrollerY) {
 					// Usual cases
 					q.offsetX = getOffset(e.deltaX);
-					q.offsetX = getOffset(e.deltaY);
+					q.offsetY = getOffset(e.deltaY);
 					return q;
 				}
 				if (config.scrollOverflowHidden && (e.deltaX && !q.scrollerX || e.deltaY && !q.scrollerY)) {
@@ -101,6 +101,9 @@
 			}
 
 			element = element.parentNode;
+			if (element == document) {
+				return null;
+			}
 		}
 
 		return null;
