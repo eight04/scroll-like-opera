@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Select like Opera
+// @name        Scroll like Opera
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
