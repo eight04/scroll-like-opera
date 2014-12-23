@@ -20,6 +20,8 @@ Todos
 
 Changelog
 ---------
+* 1.0.4 (Dec 23, 2014):
+	- Fix typo.
 * 1.0.3 (Dec 23, 2014):
 	- Fix inline element.
 * 1.0.2 (Dec 23, 2014):
