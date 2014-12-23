@@ -6,7 +6,6 @@ Features
 --------
 * Scroll horizontally when the cursor hover on horizontal scrollbar.
 * Scroll horizontally if there is only one horizontal scrollbar.
-* Force to scroll content under cursor. (Like scrolling with arrow keys)
 * Scroll `overflow: hidden` content.
 
 Test page
@@ -15,10 +14,11 @@ Test page
 
 Todos
 -----
-* Make sure to scroll 138px?
-* Scroll again during animation?
+* Better behavior when scrolling to top/bottom.
 
 Changelog
 ---------
+* 1.0.0 (Dec 23, 2014):
+	- First release.
 * 0.1.0 (Dec 19, 2014):
 	- Initial version.
