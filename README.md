@@ -22,7 +22,7 @@ Todos
 Changelog
 ---------
 * 2.0.0 (Dec 24, 2014):
-	- Stop detecting scrollbar anymore and don't scroll `overflow:hidden` element anymore.
+	- Stop detecting scrollbar and don't scroll `overflow:hidden` element anymore.
 * 1.0.4 (Dec 23, 2014):
 	- Fix typo.
 * 1.0.3 (Dec 23, 2014):
