@@ -30,7 +30,7 @@
 	*/
 	window.addEventListener("wheel", function(e){
 		var q = getScrollInfo(e.target, e);
-		
+
 		if (q && (q.use || config.useAlways)) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
