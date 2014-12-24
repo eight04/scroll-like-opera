@@ -18,7 +18,7 @@
 	var config = {
 		useWhenOnScrollbar: true,
 		useWhenOneScrollbar: true,
-		alwaysUse: false,
+		useAlways: false,
 		scrollDelay: 400,
 		scrollOffset: 120
 	};
@@ -31,7 +31,7 @@
 	window.addEventListener("wheel", function(e){
 		var q = getScrollInfo(e.target, e);
 		console.log(q);
-		if (q && (q.use || config.alwaysUse)) {
+		if (q && (q.use || config.useAlways)) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
 		}
@@ -52,9 +52,10 @@
 				element: element,
 				onScrollbarX: element.clientHeight && e.clientY >= rect.top + css.borderTop + element.clientHeight && e.clientY <= rect.bottom - css.borderBottom,
 				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth && css.overflowX != "visible" && css.overflowX != "hidden",
-				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight && css.overflowY != "visible" && css.overflowY != "hidden",
-				scrollerX: element.clientHeight && element.offsetHeight - css.borderTop - css.borderBottom > element.clientHeight,
-				scrollerY: element.clientWidth && element.offsetWidth - css.borderLeft - css.borderRight > element.clientWidth
+				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight && css.overflowY != "visible" && css.overflowY != "hidden"
+//				,
+//				scrollerX: element.clientHeight && element.offsetHeight - css.borderTop - css.borderBottom > element.clientHeight,
+//				scrollerY: element.clientWidth && element.offsetWidth - css.borderLeft - css.borderRight > element.clientWidth
 			};
 
 		} else {
@@ -63,9 +64,10 @@
 				element: element,
 				onScrollbarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
 				scrollableX: element.scrollWidth > element.clientWidth,
-				scrollableY: element.scrollHeight > element.clientHeight,
-				scrollerX: window.innerHeight - element.clientHeight,
-				scrollerY: window.innerWidth - element.clientWidth
+				scrollableY: element.scrollHeight > element.clientHeight
+//				,
+//				scrollerX: window.innerHeight - element.clientHeight,
+//				scrollerY: window.innerWidth - element.clientWidth
 			};
 		}
 	}
@@ -87,19 +89,19 @@
 			}
 
 			if ((e.deltaX && q.scrollableX || e.deltaY && q.scrollableY) && scrollable(element, e.deltaX, e.deltaY)) {
-				if (e.deltaX && q.scrollerX || e.deltaY && q.scrollerY) {
+//				if (e.deltaX && q.scrollerX || e.deltaY && q.scrollerY) {
 					// Usual cases
 					q.offsetX = getOffset(e.deltaX);
 					q.offsetY = getOffset(e.deltaY);
 					return q;
-				}
-				if (config.scrollOverflowHidden && (e.deltaX && !q.scrollerX || e.deltaY && !q.scrollerY)) {
-					// Scroll hidden
-					q.offsetX = getOffset(e.deltaX);
-					q.offsetY = getOffset(e.deltaY);
-					q.use = true;
-					return q;
-				}
+//				}
+//				if (config.scrollOverflowHidden && (e.deltaX && !q.scrollerX || e.deltaY && !q.scrollerY)) {
+//					// Scroll hidden
+//					q.offsetX = getOffset(e.deltaX);
+//					q.offsetY = getOffset(e.deltaY);
+//					q.use = true;
+//					return q;
+//				}
 			}
 
 			element = element.parentNode;
@@ -174,13 +176,13 @@
 		Helpers
 	*/
 	function useHorizontalScroll(q) {
-		if (!config.scrollHorizontallyWithScrollbar) {
+		if (!config.useWhenOneScrollbar) {
 			return false;
 		}
-		if (config.scrollOverflowHidden && !q.scrollerX && !q.scrollerY) {
-			return q.scrollableX && !q.scrollableY;
-		}
-		return q.scrollerX && (!q.scrollerY || !q.scrollableY);
+//		if (config.scrollOverflowHidden && !q.scrollerX && !q.scrollerY) {
+//			return q.scrollableX && !q.scrollableY;
+//		}
+		return config.useWhenOneScrollbar && q.scrollableX && !q.scrollableY;
 	}
 
 	function getOffset(delta) {
@@ -248,17 +250,17 @@
 		GM_config.init(
 			"Scroll like Opera",
 			{
-				scrollHorizontallyWithScrollbar: {
+				useWhenOnScrollbar: {
+					label: "Scroll horizontally if cursor hover on horizontal scrollbar.",
+					type: "checkbox",
+					default: true
+				},
+				useWhenOneScrollbar: {
 					label: "Scroll horizontally if only horizontal scrollbar presented.",
 					type: "checkbox",
 					default: true
 				},
-				scrollOverflowHidden: {
-					label: "Make overflow:hidden element scrollable.",
-					type: "checkbox",
-					default: false
-				},
-				alwaysUse: {
+				useAlways: {
 					label: "Always use script's scrolling handler. Enable this if you want to use the script's smooth scrolling on chrome.",
 					type: "checkbox",
 					default: false
@@ -276,9 +278,9 @@
 			}
 		);
 
-		config.scrollHorizontallyWithScrollbar = GM_config.get("scrollHorizontallyWithScrollbar");
-		config.scrollOverflowHidden = GM_config.get("scrollOverflowHidden");
-		config.alwaysUse = GM_config.get("alwaysUse");
+		config.useWhenOnScrollbar = GM_config.get("useWhenOnScrollbar");
+		config.useWhenOneScrollbar = GM_config.get("useWhenOneScrollbar");
+		config.useAlways = GM_config.get("useAlways");
 		config.scrollDelay = +GM_config.get("scrollDelay");
 		config.scrollOffset = +GM_config.get("scrollOffset");
 
