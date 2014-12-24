@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     1.0.4
+// @version     2.0.0
 // @require 	https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -30,7 +30,7 @@
 	*/
 	window.addEventListener("wheel", function(e){
 		var q = getScrollInfo(e.target, e);
-		console.log(q);
+		
 		if (q && (q.use || config.useAlways)) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
