@@ -256,7 +256,7 @@
 					default: true
 				},
 				useWhenOneScrollbar: {
-					label: "Scroll horizontally if only horizontal scrollbar presented.",
+					label: "Scroll horizontally if there is only horizontal scrollbar presented.",
 					type: "checkbox",
 					default: true
 				},
@@ -266,7 +266,7 @@
 					default: false
 				},
 				scrollDelay: {
-					label: "Smooth scrolling dealy.",
+					label: "Smooth scrolling delay.",
 					type: "text",
 					default: 400
 				},
