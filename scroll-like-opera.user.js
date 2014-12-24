@@ -53,9 +53,6 @@
 				onScrollbarX: element.clientHeight && e.clientY >= rect.top + css.borderTop + element.clientHeight && e.clientY <= rect.bottom - css.borderBottom,
 				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth && css.overflowX != "visible" && css.overflowX != "hidden",
 				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight && css.overflowY != "visible" && css.overflowY != "hidden"
-//				,
-//				scrollerX: element.clientHeight && element.offsetHeight - css.borderTop - css.borderBottom > element.clientHeight,
-//				scrollerY: element.clientWidth && element.offsetWidth - css.borderLeft - css.borderRight > element.clientWidth
 			};
 
 		} else {
@@ -65,9 +62,6 @@
 				onScrollbarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
 				scrollableX: element.scrollWidth > element.clientWidth,
 				scrollableY: element.scrollHeight > element.clientHeight
-//				,
-//				scrollerX: window.innerHeight - element.clientHeight,
-//				scrollerY: window.innerWidth - element.clientWidth
 			};
 		}
 	}
@@ -89,19 +83,9 @@
 			}
 
 			if ((e.deltaX && q.scrollableX || e.deltaY && q.scrollableY) && scrollable(element, e.deltaX, e.deltaY)) {
-//				if (e.deltaX && q.scrollerX || e.deltaY && q.scrollerY) {
-					// Usual cases
-					q.offsetX = getOffset(e.deltaX);
-					q.offsetY = getOffset(e.deltaY);
-					return q;
-//				}
-//				if (config.scrollOverflowHidden && (e.deltaX && !q.scrollerX || e.deltaY && !q.scrollerY)) {
-//					// Scroll hidden
-//					q.offsetX = getOffset(e.deltaX);
-//					q.offsetY = getOffset(e.deltaY);
-//					q.use = true;
-//					return q;
-//				}
+				q.offsetX = getOffset(e.deltaX);
+				q.offsetY = getOffset(e.deltaY);
+				return q;
 			}
 
 			element = element.parentNode;
@@ -176,12 +160,6 @@
 		Helpers
 	*/
 	function useHorizontalScroll(q) {
-		if (!config.useWhenOneScrollbar) {
-			return false;
-		}
-//		if (config.scrollOverflowHidden && !q.scrollerX && !q.scrollerY) {
-//			return q.scrollableX && !q.scrollableY;
-//		}
 		return config.useWhenOneScrollbar && q.scrollableX && !q.scrollableY;
 	}
 
