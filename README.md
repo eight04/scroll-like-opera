@@ -6,7 +6,7 @@ Features
 --------
 * Scroll horizontally when the cursor hover on horizontal scrollbar.
 * Scroll horizontally if there is only one horizontal scrollbar.
-* Scroll `overflow: hidden` content.
+* Smooth scrolling.
 
 Test page
 ---------
