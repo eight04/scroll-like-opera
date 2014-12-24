@@ -16,8 +16,8 @@
 	"use strict";
 
 	var config = {
-		scrollHorizontallyWithScrollbar: true,
-		scrollOverflowHidden: false,
+		useWhenOnScrollbar: true,
+		useWhenOneScrollbar: true,
 		alwaysUse: false,
 		scrollDelay: 400,
 		scrollOffset: 120
@@ -30,7 +30,7 @@
 	*/
 	window.addEventListener("wheel", function(e){
 		var q = getScrollInfo(e.target, e);
-
+		console.log(q);
 		if (q && (q.use || config.alwaysUse)) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
@@ -41,20 +41,20 @@
 		Main logic
 	*/
 	function getInfo(element, e) {
-		var rect, border;
+		var rect, css;
 
 		if (element != document.documentElement) {
 
 			rect = element.getBoundingClientRect();
-			border = getBorder(element);
+			css = getCss(element);
 
 			return {
 				element: element,
-				onScrollbarX: element.clientHeight && e.clientY >= rect.top + border.top + element.clientHeight && e.clientY <= rect.bottom - border.bottom,
-				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth,
-				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight,
-				scrollerX: element.clientHeight && element.offsetHeight - border.top - border.bottom > element.clientHeight,
-				scrollerY: element.clientWidth && element.offsetWidth - border.left - border.right > element.clientWidth
+				onScrollbarX: element.clientHeight && e.clientY >= rect.top + css.borderTop + element.clientHeight && e.clientY <= rect.bottom - css.borderBottom,
+				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth && css.overflowX != "visible" && css.overflowX != "hidden",
+				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight && css.overflowY != "visible" && css.overflowY != "hidden",
+				scrollerX: element.clientHeight && element.offsetHeight - css.borderTop - css.borderBottom > element.clientHeight,
+				scrollerY: element.clientWidth && element.offsetWidth - css.borderLeft - css.borderRight > element.clientWidth
 			};
 
 		} else {
@@ -197,14 +197,16 @@
 		return BezierEasing.css.ease(t);
 	}
 
-	function getBorder(element){
+	function getCss(element){
 		var css = getComputedStyle(element);
 
 		return {
-			top: parseInt(css.getPropertyValue("border-top-width"), 10),
-			right: parseInt(css.getPropertyValue("border-right-width"), 10),
-			bottom: parseInt(css.getPropertyValue("border-bottom-width"), 10),
-			left: parseInt(css.getPropertyValue("border-left-width"), 10)
+			borderTop: parseInt(css.getPropertyValue("border-top-width"), 10),
+			borderRight: parseInt(css.getPropertyValue("border-right-width"), 10),
+			borderBottom: parseInt(css.getPropertyValue("border-bottom-width"), 10),
+			borderLeft: parseInt(css.getPropertyValue("border-left-width"), 10),
+			overflowX: css.getPropertyValue("overflow-x"),
+			overflowY: css.getPropertyValue("overflow-y")
 		};
 	}
 
