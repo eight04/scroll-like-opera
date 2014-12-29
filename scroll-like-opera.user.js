@@ -3,8 +3,8 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     2.0.0
-// @require 	https://greasyfork.org/scripts/1884-gm-config/code/GM_config.js?version=4836
+// @version     2.0.1
+// @require		https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29822
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
 // @grant		GM_getValue
@@ -15,15 +15,44 @@
 
 	"use strict";
 
-	var config = {
-		useWhenOnScrollbar: true,
-		useWhenOneScrollbar: true,
-		useAlways: false,
-		scrollDelay: 400,
-		scrollOffset: 120
-	};
+	var config;
 
-	initConfig(config);
+	GM_config.init(
+		"Scroll like Opera",
+		{
+			useWhenOnScrollbar: {
+				label: "Scroll horizontally if cursor hover on horizontal scrollbar.",
+				type: "checkbox",
+				default: true
+			},
+			useWhenOneScrollbar: {
+				label: "Scroll horizontally if there is only horizontal scrollbar presented.",
+				type: "checkbox",
+				default: true
+			},
+			useAlways: {
+				label: "Always use script's scrolling handler. Enable this if you want to use the script's smooth scrolling on chrome.",
+				type: "checkbox",
+				default: false
+			},
+			scrollDelay: {
+				label: "Smooth scrolling delay.",
+				type: "text",
+				default: 400
+			},
+			scrollOffset: {
+				label: "Scrolling offset.",
+				type: "text",
+				default: 120
+			}
+		}
+	);
+
+	config = GM_config.get();
+
+	GM_registerMenuCommand("Scroll like Opera - Configure", function(){
+		GM_config.open();
+	});
 
 	/**
 		Register event
@@ -224,46 +253,4 @@
 		}
 	}
 
-	function initConfig(config) {
-		GM_config.init(
-			"Scroll like Opera",
-			{
-				useWhenOnScrollbar: {
-					label: "Scroll horizontally if cursor hover on horizontal scrollbar.",
-					type: "checkbox",
-					default: true
-				},
-				useWhenOneScrollbar: {
-					label: "Scroll horizontally if there is only horizontal scrollbar presented.",
-					type: "checkbox",
-					default: true
-				},
-				useAlways: {
-					label: "Always use script's scrolling handler. Enable this if you want to use the script's smooth scrolling on chrome.",
-					type: "checkbox",
-					default: false
-				},
-				scrollDelay: {
-					label: "Smooth scrolling delay.",
-					type: "text",
-					default: 400
-				},
-				scrollOffset: {
-					label: "Scrolling offset.",
-					type: "text",
-					default: 120
-				}
-			}
-		);
-
-		config.useWhenOnScrollbar = GM_config.get("useWhenOnScrollbar");
-		config.useWhenOneScrollbar = GM_config.get("useWhenOneScrollbar");
-		config.useAlways = GM_config.get("useAlways");
-		config.scrollDelay = +GM_config.get("scrollDelay");
-		config.scrollOffset = +GM_config.get("scrollOffset");
-
-		GM_registerMenuCommand("Scroll like Opera - Configure", function(){
-			GM_config.open();
-		});
-	}
 })();

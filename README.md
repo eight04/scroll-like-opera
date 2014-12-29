@@ -21,6 +21,8 @@ Todos
 
 Changelog
 ---------
+* 2.0.1 (Dec 29, 2014):
+	- Use a different GM_config library.
 * 2.0.0 (Dec 24, 2014):
 	- Stop detecting scrollbar and don't scroll `overflow:hidden` element anymore.
 * 1.0.4 (Dec 23, 2014):
