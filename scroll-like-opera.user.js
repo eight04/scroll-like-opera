@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     2.0.2
+// @version     2.0.3
 // @require		https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29833
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -53,6 +53,10 @@
 	GM_registerMenuCommand("Scroll like Opera - Configure", function(){
 		GM_config.open();
 	});
+
+	GM_config.onclose = function(){
+		config = GM_config.get();
+	};
 
 	/**
 		Register event

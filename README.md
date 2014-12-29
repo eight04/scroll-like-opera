@@ -20,7 +20,8 @@ Todos
 * Chrome doesn't fire wheel event when cursor hover on window scrollbar.
 
 Changelog
----------
+* 2.0.3 (Dec 29, 2014):
+	- Reload config after configure.
 * 2.0.2 (Dec 29, 2014):
 	- Update GM_config to 0.2.2.
 * 2.0.1 (Dec 29, 2014):
