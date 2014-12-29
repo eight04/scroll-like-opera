@@ -21,6 +21,8 @@ Todos
 
 Changelog
 ---------
+* 2.0.2 (Dec 29, 2014):
+	- Update GM_config to 0.2.2.
 * 2.0.1 (Dec 29, 2014):
 	- Use a different GM_config library.
 * 2.0.0 (Dec 24, 2014):
