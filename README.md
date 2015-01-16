@@ -16,10 +16,12 @@ Todos
 -----
 * Better behavior when scrolling to top/bottom.
 * Get wrong value if zooming the page.
-* Need a better way to detect scrollbar. Current method doesn't work in Firefox's responsive design mode.
 * Chrome doesn't fire wheel event when cursor hover on window scrollbar.
 
 Changelog
+---------
+* 2.0.4 (Jan 16, 2015):
+	- Fix scrollable document.body bug.
 * 2.0.3 (Dec 29, 2014):
 	- Reload config after configure.
 * 2.0.2 (Dec 29, 2014):

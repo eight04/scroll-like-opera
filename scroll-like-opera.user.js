@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     2.0.3
+// @version     2.0.4
 // @require		https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29833
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -76,8 +76,21 @@
 	function getInfo(element, e) {
 		var rect, css;
 
-		if (element != document.documentElement) {
-
+		if (element == document.documentElement) {
+			return {
+				element: element,
+				onScrollbarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
+				scrollableX: element.scrollWidth > element.clientWidth,
+				scrollableY: element.scrollHeight > element.clientHeight
+			};
+		} else if (element == document.body) {
+			return {
+				element: element,
+				onScrollbarX: false,
+				scrollableX: false,
+				scrollableY: false
+			};
+		} else {
 			rect = element.getBoundingClientRect();
 			css = getCss(element);
 
@@ -86,15 +99,6 @@
 				onScrollbarX: element.clientHeight && e.clientY >= rect.top + css.borderTop + element.clientHeight && e.clientY <= rect.bottom - css.borderBottom,
 				scrollableX: element.clientWidth && element.scrollWidth > element.clientWidth && css.overflowX != "visible" && css.overflowX != "hidden",
 				scrollableY: element.clientHeight && element.scrollHeight > element.clientHeight && css.overflowY != "visible" && css.overflowY != "hidden"
-			};
-
-		} else {
-
-			return {
-				element: element,
-				onScrollbarX: e.clientY >= element.clientHeight && e.clientY <= window.innerHeight,
-				scrollableX: element.scrollWidth > element.clientWidth,
-				scrollableY: element.scrollHeight > element.clientHeight
 			};
 		}
 	}
