@@ -14,12 +14,20 @@ Test page
 
 Todos
 -----
-* Better behavior when scrolling to top/bottom.
-* Get wrong value if zooming the page.
+* Better behavior when scrolling to top/bottom?
+	- Currently, if the inner element scrolled to edge, it will check outer element whether is scrollable.
+	- How to guess which element we are going to scroll?
+	- What does it mean when user want to scroll and unscrollable element?
+* Get wrong value if the page is zoomed.
+
+Known bugs
+----------
 * Chrome doesn't fire wheel event when cursor hover on window scrollbar.
 
 Changelog
 ---------
+* 2.1.0 (Feb 17, 2015):
+	- Add a small delay to change scrolled target when scrolling to bottom/top.
 * 2.0.4 (Jan 16, 2015):
 	- Fix scrollable document.body bug.
 * 2.0.3 (Dec 29, 2014):

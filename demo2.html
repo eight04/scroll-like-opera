@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>Scroll like Opera</title>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29822"></script>
+	<script src="https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098"></script>
+	<script>
+		function GM_registerMenuCommand(){}
+	</script>
+	<link rel="stylesheet" href="https://rawgit.com/eight04/end2end/master/dist/end2end.css">
+	<style>
+		.scroller-content {
+			width: 3000px;
+			height: 3000px;
+			background: linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet);
+		}
+		.scroller {
+			border: 1px solid;
+			height: 200px;
+			overflow: scroll;
+		}
+		.s2 {
+			overflow-y: hidden;
+		}
+		.s3 {
+			overflow-x: hidden;
+		}
+		.s4 {
+			overflow: hidden;
+		}
+		.s5 {
+			overflow-x: hidden;
+		}
+		.s6 {
+			overflow-x: hidden;
+			margin: 100px 0;
+		}
+		.s7 {
+			overflow: scroll;
+		}
+		.s7 .scroller-content {
+			height: 100%;
+		}
+	</style>
+</head>
+<body class="container-sm">
+	<h2>Scroll like Opera <small>Test Page</small></h2>
+
+	<button class="btn-default" onclick="GM_config.open()">Config</button>
+
+	<h3>overflow: scroll</h3>
+	<div class="scroller s1">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow-y: hidden</h3>
+	<div class="scroller s2">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow-x: hidden</h3>
+	<div class="scroller s3">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>overflow: hidden</h3>
+	<div class="scroller s4">
+		<div class="scroller-content"></div>
+	</div>
+
+	<h3>Nested</h3>
+	<div class="scroller s5">
+		<div class="scroller s6">
+			<div class="scroller-content"></div>
+		</div>
+	</div>
+
+	<h3>Unscrollable y</h3>
+	<div class="scroller s7">
+		<div class="scroller-content"></div>
+	</div>
+
+	<div class="page-footer">
+		<p>eight04 &copy; 2014</p>
+	</div>
+<!--	<script src="scroll-like-opera.user.js"></script>-->
+</body>
+</html>

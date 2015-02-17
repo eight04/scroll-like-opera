@@ -3,7 +3,7 @@
 // @description	An userscript to provide Opera(old) like scrolling behavior.
 // @namespace   eight04.blogspot.com
 // @include     http*
-// @version     2.0.4
+// @version     2.1.0
 // @require		https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29833
 // @require		https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098
 // @grant       GM_setValue
@@ -44,6 +44,11 @@
 				label: "Scrolling offset.",
 				type: "text",
 				default: 120
+			},
+			continueScrollingTimeout: {
+				label: "Scrolled target changing delay.",
+				type: "number",
+				default: 400
 			}
 		}
 	);
@@ -59,15 +64,61 @@
 	};
 
 	/**
+		Cache current scrolling target
+	*/
+	var cache = {
+		timeout: null,
+		target: null,
+		cache: function(element) {
+			cache.target = element;
+			cache.delay();
+		},
+		reset: function() {
+			clearTimeout(cache.timeout);
+			cache.timeout = null;
+			cache.target = null;
+		},
+		delay: function() {
+			clearTimeout(cache.timeout);
+			cache.timeout = setTimeout(cache.reset, config.continueScrollingTimeout);
+		}
+	};
+
+	/**
 		Register event
 	*/
 	window.addEventListener("wheel", function(e){
-		var q = getScrollInfo(e.target, e);
+		var q;
 
-		if (q && (q.use || config.useAlways)) {
+		if (cache.target) {
+			q = getScrollInfo(cache.target, e, true);
+
+			// Scrolled to edge
+			if (!q) {
+				e.preventDefault();
+				return;
+			}
+
+			cache.delay();
+		} else {
+			q = getScrollInfo(e.target, e);
+
+			// Can't find scrollable element
+			if (!q) {
+				return;
+			}
+
+			cache.cache(q.element);
+		}
+
+		if (q.use || config.useAlways) {
 			e.preventDefault();
 			scroll(q.element, q.offsetX, q.offsetY);
 		}
+	});
+
+	window.addEventListener("mousemove", function(){
+		cache.reset();
 	});
 
 	/**
@@ -103,7 +154,7 @@
 		}
 	}
 
-	function getScrollInfo(element, e) {
+	function getScrollInfo(element, e, noParent) {
 		var q;
 
 		// Get scrollable parent
@@ -123,6 +174,10 @@
 				q.offsetX = getOffset(e.deltaX);
 				q.offsetY = getOffset(e.deltaY);
 				return q;
+			}
+
+			if (noParent) {
+				return null;
 			}
 
 			element = element.parentNode;
