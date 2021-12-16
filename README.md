@@ -1,6 +1,6 @@
 Scroll like Opera
 =================
-An userscript to provide Opera(old) like scrolling behavior.
+A userscript to provide Opera(old) like scrolling behavior.
 
 Features
 --------
