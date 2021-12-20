@@ -1,6 +1,6 @@
 Scroll like Opera
 =================
-An userscript to provide Opera(old) like scrolling behavior.
+A userscript to provide Opera(old) like scrolling behavior.
 
 Features
 --------
@@ -26,6 +26,11 @@ Known bugs
 
 Changelog
 ---------
+
+* 2.1.1 (Dec 20, 2021)
+
+  - Fix: use non-passive wheel event.
+  
 * 2.1.0 (Feb 17, 2015):
 	- Add a small delay to change scrolled target when scrolling to bottom/top.
 * 2.0.4 (Jan 16, 2015):

@@ -1,0 +1,47 @@
+{
+  "name": "scroll-like-opera",
+  "description": "Based on Linkify Plus. Turn plain text URLs into links.",
+  "version": "2.1.0",
+  "repository": "eight04/scroll-like-opera",
+  "license": "MIT",
+  "author": "eight04 <eight04@gmail.com>",
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "sync-version": "^1.0.1",
+    "userscript-meta-cli": "^0.4.2"
+  },
+  "scripts": {
+    "build": "userscript-meta -u scroll-like-opera.user.js",
+    "test": "eslint . --cache",
+    "preversion": "npm test",
+    "version": "npm run build && git add .",
+    "postversion": "git push --follow-tags"
+  },
+  "eslintIgnore": [
+    "dist-extension",
+    "dist"
+  ],
+  "userscript": {
+    "name": "Scroll like Opera",
+    "namespace": "eight04.blogspot.com",
+    "grant": [
+      "GM.getValue",
+      "GM.setValue",
+      "GM.deleteValue",
+      "GM_registerMenuCommand",
+      "GM_getValue",
+      "GM_setValue",
+      "GM_deleteValue",
+      "GM_addValueChangeListener"
+    ],
+    "compatible": [
+      "firefox Tampermonkey latest",
+      "chrome Tampermonkey latest"
+    ],
+    "require": [
+      "https://greasyfork.org/scripts/7212-gm-config-eight-s-version/code/GM_config%20(eight's%20version).js?version=29833",
+      "https://greasyfork.org/scripts/7108-bezier-easing/code/bezier-easing.js?version=29098"
+    ]
+  },
+  "private": true
+}
