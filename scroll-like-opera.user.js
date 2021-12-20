@@ -125,7 +125,7 @@ window.addEventListener("wheel", function(e){
     e.preventDefault();
     scrollElement(q.element, q.offsetX, q.offsetY);
   }
-});
+}, {passive: false});
 
 window.addEventListener("mousemove", function(){
   cache.reset();
