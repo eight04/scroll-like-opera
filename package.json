@@ -1,7 +1,7 @@
 {
   "name": "scroll-like-opera",
   "description": "Based on Linkify Plus. Turn plain text URLs into links.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "repository": "eight04/scroll-like-opera",
   "license": "MIT",
   "author": "eight04 <eight04@gmail.com>",

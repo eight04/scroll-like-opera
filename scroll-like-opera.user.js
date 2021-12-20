@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name Scroll like Opera
-// @version 2.1.0
+// @version 2.1.1
 // @description Based on Linkify Plus. Turn plain text URLs into links.
 // @license MIT
 // @author eight04 <eight04@gmail.com>
